@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FitnessTracker.Database.Migrations;
 
 [DbContext(typeof(FitnessContext))]
-[Migration("20241014183754_InitialCreate")]
-partial class InitialCreate
+[Migration("20241015125404_AddLoginAttemptsAndIsLocked")]
+partial class AddLoginAttemptsAndIsLocked
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,17 @@ partial class InitialCreate
                     .ValueGeneratedOnAdd()
                     .HasColumnType("INTEGER");
 
+                b.Property<bool>("IsLocked")
+                    .HasColumnType("INTEGER");
+
+                b.Property<int>("LoginAttempts")
+                    .HasColumnType("INTEGER");
+
                 b.Property<string>("Password")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("PhoneNumber")
                     .IsRequired()
                     .HasColumnType("TEXT");
 

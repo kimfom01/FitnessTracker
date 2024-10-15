@@ -31,7 +31,7 @@ partial class LoginForm
     private void InitializeComponent()
     {
         loginBtn = new Button();
-        welcomeLbl = new Label();
+        loginTitleLbl = new Label();
         usernameTxt = new TextBox();
         usernameLbl = new Label();
         passwordLbl = new Label();
@@ -49,16 +49,16 @@ partial class LoginForm
         loginBtn.UseVisualStyleBackColor = true;
         loginBtn.Click += loginBtn_Click;
         // 
-        // welcomeLbl
+        // loginTitleLbl
         // 
-        welcomeLbl.AutoSize = true;
-        welcomeLbl.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        welcomeLbl.Location = new Point(145, 9);
-        welcomeLbl.Name = "welcomeLbl";
-        welcomeLbl.Size = new Size(345, 40);
-        welcomeLbl.TabIndex = 1;
-        welcomeLbl.Text = "Login To Fitness Tracker";
-        welcomeLbl.TextAlign = ContentAlignment.TopCenter;
+        loginTitleLbl.AutoSize = true;
+        loginTitleLbl.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        loginTitleLbl.Location = new Point(145, 9);
+        loginTitleLbl.Name = "loginTitleLbl";
+        loginTitleLbl.Size = new Size(345, 40);
+        loginTitleLbl.TabIndex = 1;
+        loginTitleLbl.Text = "Login To Fitness Tracker";
+        loginTitleLbl.TextAlign = ContentAlignment.TopCenter;
         // 
         // usernameTxt
         // 
@@ -117,7 +117,7 @@ partial class LoginForm
         Controls.Add(passwordLbl);
         Controls.Add(usernameLbl);
         Controls.Add(usernameTxt);
-        Controls.Add(welcomeLbl);
+        Controls.Add(loginTitleLbl);
         Controls.Add(loginBtn);
         Font = new Font("Segoe UI", 14F);
         Margin = new Padding(5);
@@ -131,7 +131,7 @@ partial class LoginForm
     #endregion
 
     private Button loginBtn;
-    private Label welcomeLbl;
+    private Label loginTitleLbl;
     private TextBox usernameTxt;
     private Label usernameLbl;
     private Label passwordLbl;

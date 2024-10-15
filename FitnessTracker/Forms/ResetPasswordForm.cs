@@ -1,27 +1,28 @@
 ﻿using FitnessTracker.Database;
 using FitnessTracker.Database.Passwords;
 using FitnessTracker.Database.Repositories;
-using FitnessTracker.Models;
 using FitnessTracker.Validation;
 
-namespace FitnessTracker;
+namespace FitnessTracker.Forms;
 
-public partial class RegistrationForm : Form
+public partial class ResetPasswordForm : Form
 {
     private readonly IInputFormatValidator _inputFormatValidator;
     private readonly IPasswordManager _passwordManager;
     private readonly IUserRepository _userRepository;
+    private readonly string _username;
 
-    public RegistrationForm()
+    public ResetPasswordForm(string username)
     {
         InitializeComponent();
-
+        
         _inputFormatValidator = new InputFormatValidator();
         _passwordManager = new PasswordManager();
         _userRepository = new UserRepository(new FitnessContext());
+        _username = username;
     }
 
-    private void registerBtn_Click(object sender, EventArgs e)
+    private void resetBtn_Click(object sender, EventArgs e)
     {
         var validated = ValidateFormInput();
 
@@ -30,53 +31,35 @@ public partial class RegistrationForm : Form
             return;
         }
 
-        try
+        var phoneNumber = phoneNumberTxt.Text;
+        var password = _passwordManager.HashPassword(passwordTxt.Text);
+
+        var user = _userRepository.GetUser(_username);
+
+        if (user is null)
         {
-            string username = usernameTxt.Text;
-
-            var phoneNumber = phoneNumberTxt.Text;
-
-            if (_userRepository.CheckIfUserExist(username))
-            {
-                MessageBox.Show("This username is already taken!");
-                return;
-            }
-
-            string hashedPassword = _passwordManager.HashPassword(passwordTxt.Text);
-
-            var added = _userRepository.AddUser(ApplicationUser.Create(username, hashedPassword, phoneNumber));
-            _userRepository.SaveChanges();
-
-            MessageBox.Show($"Account Registered!\nYou can proceed to login");
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"An error occured: {ex.Message}");
+            MessageBox.Show("Error! Something is really really wrong... this should not be possible");
+            Close();
             return;
         }
-    }
 
-    private void loginLbl_Click(object sender, EventArgs e)
-    {
+        bool phoneNumberExists = _userRepository.CheckIfPhoneNumberExists(_username, phoneNumber);
 
-        var loginThread = new Thread(() =>
+        if (!phoneNumberExists)
         {
-            Application.Run(new LoginForm());
-        });
+            MessageBox.Show("Error! Phone number is wrong.\nPlease enter your phone number or create a new account");
+            return;
+        }
 
-        loginThread.Start();
-
-        Close();
+        user.UpdatePassword(password);
+        user.UnLockAccount();
+        _userRepository.SaveChanges();
+        MessageBox.Show("Successfully updated your password!\nYou can now login and continue using your account");
+        OpenLoginForm();
     }
 
     private bool ValidateFormInput()
     {
-        if (!_inputFormatValidator.ValidateUsername(usernameTxt.Text))
-        {
-            MessageBox.Show("Invalid username format: Usernames must contain only letters and numbers");
-            return false;
-        }
-
         if (!_inputFormatValidator.ValidatePhoneNumber(phoneNumberTxt.Text))
         {
             MessageBox.Show("Invalid phone number format: Example 0972060814");
@@ -96,5 +79,17 @@ public partial class RegistrationForm : Form
         }
 
         return true;
+    }
+
+    private void OpenLoginForm()
+    {
+        var loginThread = new Thread(() =>
+        {
+            Application.Run(new LoginForm());
+        });
+
+        loginThread.Start();
+
+        Close();
     }
 }

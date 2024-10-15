@@ -33,7 +33,7 @@ partial class RegistrationForm
         passwordLbl = new Label();
         usernameLbl = new Label();
         usernameTxt = new TextBox();
-        welcomeLbl = new Label();
+        registrationTitleLbl = new Label();
         registerBtn = new Button();
         phoneNumberLbl = new Label();
         phoneNumberTxt = new TextBox();
@@ -86,16 +86,16 @@ partial class RegistrationForm
         usernameTxt.Size = new Size(489, 32);
         usernameTxt.TabIndex = 1;
         // 
-        // welcomeLbl
+        // registrationTitleLbl
         // 
-        welcomeLbl.AutoSize = true;
-        welcomeLbl.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        welcomeLbl.Location = new Point(132, 9);
-        welcomeLbl.Name = "welcomeLbl";
-        welcomeLbl.Size = new Size(395, 40);
-        welcomeLbl.TabIndex = 7;
-        welcomeLbl.Text = "Welcome To Fitness Tracker";
-        welcomeLbl.TextAlign = ContentAlignment.TopCenter;
+        registrationTitleLbl.AutoSize = true;
+        registrationTitleLbl.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        registrationTitleLbl.Location = new Point(132, 9);
+        registrationTitleLbl.Name = "registrationTitleLbl";
+        registrationTitleLbl.Size = new Size(395, 40);
+        registrationTitleLbl.TabIndex = 7;
+        registrationTitleLbl.Text = "Welcome To Fitness Tracker";
+        registrationTitleLbl.TextAlign = ContentAlignment.TopCenter;
         // 
         // registerBtn
         // 
@@ -136,7 +136,7 @@ partial class RegistrationForm
         Controls.Add(passwordLbl);
         Controls.Add(usernameLbl);
         Controls.Add(usernameTxt);
-        Controls.Add(welcomeLbl);
+        Controls.Add(registrationTitleLbl);
         Controls.Add(registerBtn);
         Font = new Font("Segoe UI", 14F);
         Margin = new Padding(5);
@@ -154,7 +154,7 @@ partial class RegistrationForm
     private Label passwordLbl;
     private Label usernameLbl;
     private TextBox usernameTxt;
-    private Label welcomeLbl;
+    private Label registrationTitleLbl;
     private Button registerBtn;
     private Label phoneNumberLbl;
     private TextBox phoneNumberTxt;
