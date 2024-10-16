@@ -1,4 +1,4 @@
-﻿namespace FitnessTracker.Database.Passwords;
+﻿namespace FitnessTracker.Passwords;
 
 internal class PasswordManager : IPasswordManager
 {

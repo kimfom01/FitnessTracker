@@ -1,5 +1,4 @@
-﻿
-namespace FitnessTracker.Models;
+﻿namespace FitnessTracker.DataAccess.Entities;
 
 public class ApplicationUser
 {

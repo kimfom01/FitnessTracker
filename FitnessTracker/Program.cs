@@ -1,4 +1,4 @@
-using FitnessTracker.Database;
+using FitnessTracker.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessTracker;

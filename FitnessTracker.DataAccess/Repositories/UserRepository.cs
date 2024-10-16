@@ -1,8 +1,8 @@
-﻿using FitnessTracker.Models;
+﻿using FitnessTracker.DataAccess.Entities;
 
-namespace FitnessTracker.Database.Repositories;
+namespace FitnessTracker.DataAccess.Repositories;
 
-internal class UserRepository : IUserRepository
+public class UserRepository : IUserRepository
 {
     private readonly FitnessContext _fitnessContext;
 

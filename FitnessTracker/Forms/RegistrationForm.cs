@@ -1,7 +1,7 @@
-﻿using FitnessTracker.Database;
-using FitnessTracker.Database.Passwords;
-using FitnessTracker.Database.Repositories;
-using FitnessTracker.Models;
+﻿using FitnessTracker.DataAccess;
+using FitnessTracker.DataAccess.Entities;
+using FitnessTracker.DataAccess.Repositories;
+using FitnessTracker.Passwords;
 using FitnessTracker.Validation;
 
 namespace FitnessTracker;

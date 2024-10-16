@@ -1,7 +1,7 @@
-﻿using FitnessTracker.Models;
+﻿using FitnessTracker.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitnessTracker.Database;
+namespace FitnessTracker.DataAccess;
 
 public class FitnessContext : DbContext
 {

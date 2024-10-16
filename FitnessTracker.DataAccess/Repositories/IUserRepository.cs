@@ -1,8 +1,8 @@
-﻿using FitnessTracker.Models;
+﻿using FitnessTracker.DataAccess.Entities;
 
-namespace FitnessTracker.Database.Repositories;
+namespace FitnessTracker.DataAccess.Repositories;
 
-internal interface IUserRepository
+public interface IUserRepository
 {
     ApplicationUser AddUser(ApplicationUser newUser);
     bool CheckIfPhoneNumberExists(string username, string phoneNumber);
