@@ -13,4 +13,26 @@ public class FitnessContext : DbContext
 
         base.OnConfiguring(optionsBuilder);
     }
+
+    public override int SaveChanges()
+    {
+        var entries = ChangeTracker.Entries<BaseEntity>();
+
+        var currentTime = DateTime.UtcNow;
+
+        foreach (var entry in entries)
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedAtUtc = currentTime;
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.UpdatedAtUtc = currentTime;
+                    break;
+            }
+        }
+
+        return base.SaveChanges();
+    }
 }

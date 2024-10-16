@@ -1,8 +1,7 @@
 ﻿namespace FitnessTracker.DataAccess.Entities;
 
-public class ApplicationUser
+public class ApplicationUser : BaseEntity
 {
-    public int Id { get; private set; }
     public string Username { get; private set; }
     public string Password { get; private set; }
     public string PhoneNumber { get; private set; }
