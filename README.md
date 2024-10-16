@@ -29,10 +29,14 @@ If you want to add a new database migration, open the `Package Manager Console` 
 
 ### Add New Migrations
 
-Open the Package Manager Console and create the migrations using the following command format
+1. Open the Package Manager Console
+
+2. Change the default project to `FitnessTracker.DataAccess`
+
+3. Create the migrations using the following command format
 
 ```sh
-Add-Migration YourMigrationTitle -o ./Database/Migrations
+Add-Migration YourMigrationTitle
 ```
 
 ### Update the Database
