@@ -9,7 +9,7 @@ public class FitnessContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=fitnessTracker.db");
+        optionsBuilder.UseSqlite("Data Source=fitness_tracker.db");
 
         base.OnConfiguring(optionsBuilder);
     }

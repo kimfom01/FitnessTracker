@@ -48,6 +48,7 @@ public partial class RegistrationForm : Form
             _userRepository.SaveChanges();
 
             MessageBox.Show($"Account Registered!\nYou can proceed to login");
+            OpenLoginForm();
         }
         catch (Exception ex)
         {
@@ -59,6 +60,11 @@ public partial class RegistrationForm : Form
     private void loginLbl_Click(object sender, EventArgs e)
     {
 
+        OpenLoginForm();
+    }
+
+    private void OpenLoginForm()
+    {
         var loginThread = new Thread(() =>
         {
             Application.Run(new LoginForm());
