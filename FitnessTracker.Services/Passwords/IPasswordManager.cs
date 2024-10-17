@@ -1,4 +1,4 @@
-﻿namespace FitnessTracker.Passwords;
+﻿namespace FitnessTracker.CoreLogic.Passwords;
 
 public interface IPasswordManager
 {

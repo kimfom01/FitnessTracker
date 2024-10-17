@@ -1,26 +1,21 @@
-using FitnessTracker.DataAccess.Repositories;
+using FitnessTracker.CoreLogic.Exceptions;
+using FitnessTracker.CoreLogic.Services;
+using FitnessTracker.CoreLogic.Validation;
 using FitnessTracker.Forms;
-using FitnessTracker.Passwords;
-using FitnessTracker.Validation;
 
 namespace FitnessTracker;
 
 public partial class LoginForm : Form
 {
+    private readonly IAuthenticationService _authenticationService;
     private readonly IInputFormatValidator _inputFormatValidator;
-    private readonly IPasswordManager _passwordManager;
-    private readonly IUserRepository _userRepository;
 
-    private const int MaxLoginAttempts = 3;
-    private const int NoAttempts = 0;
-
-    public LoginForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository)
+    public LoginForm(IAuthenticationService authenticationService, IInputFormatValidator inputFormatValidator)
     {
         InitializeComponent();
 
+        _authenticationService = authenticationService;
         _inputFormatValidator = inputFormatValidator;
-        _passwordManager = passwordManager;
-        _userRepository = userRepository;
     }
 
     private void loginBtn_Click(object sender, EventArgs e)
@@ -36,46 +31,28 @@ public partial class LoginForm : Form
 
         string password = passwordTxt.Text;
 
-        var user = _userRepository.GetUser(username);
-
-        if (user is null)
+        try
         {
-            MessageBox.Show("Invalid username or password");
+            _authenticationService.LoginUser(username, password);
+
+            MessageBox.Show("User successfully logged in!");
+        }
+        catch (NotFoundException ex)
+        {
+            MessageBox.Show(ex.Message);
             return;
         }
-
-        if (user.IsLocked)
+        catch(AccountLockedException ex)
         {
-            MessageBox.Show("Your account is locked. Please reset your password!");
-            InitiateAccountRecovery(user.Username);
+            MessageBox.Show(ex.Message);
+            InitiateAccountRecovery(username);
             return;
         }
-
-        if (!_passwordManager.VerifyPassword(password, user.Password))
+        catch(InvalidPasswordExeption ex)
         {
-            if (user.LoginAttempts == NoAttempts)
-            {
-                user.LockAccount();
-                _userRepository.SaveChanges();
-
-                MessageBox.Show("Your account is locked. Please reset your password!");
-                InitiateAccountRecovery(user.Username);
-                return;
-            }
-
-            user.UpdateLoginAttempts();
-            _userRepository.SaveChanges();
-            MessageBox.Show("Invalid username or password");
+            MessageBox.Show(ex.Message);
             return;
         }
-
-        if (user.LoginAttempts < MaxLoginAttempts)
-        {
-            user.ResetLoginAttempts();
-            _userRepository.SaveChanges();
-        }
-
-        MessageBox.Show("User successfully logged in!");
     }
 
     private void registerLbl_Click(object sender, EventArgs e)

@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\FitnessTracker.DataAccess\FitnessTracker.DataAccess.csproj" />
+	  <ProjectReference Include="..\FitnessTracker.Services\FitnessTracker.CoreLogic.csproj" />
 	</ItemGroup>
 
 </Project>

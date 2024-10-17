@@ -1,6 +1,6 @@
-﻿using FitnessTracker.DataAccess.Repositories;
-using FitnessTracker.Passwords;
-using FitnessTracker.Validation;
+﻿using FitnessTracker.CoreLogic.Passwords;
+using FitnessTracker.CoreLogic.Validation;
+using FitnessTracker.DataAccess.Repositories;
 
 namespace FitnessTracker.Forms;
 

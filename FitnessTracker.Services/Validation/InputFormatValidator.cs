@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace FitnessTracker.Validation;
+namespace FitnessTracker.CoreLogic.Validation;
 
-internal partial class InputFormatValidator : IInputFormatValidator
+public partial class InputFormatValidator : IInputFormatValidator
 {
     public bool ValidatePasswordLength(string password)
     {

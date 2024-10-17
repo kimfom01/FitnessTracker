@@ -1,4 +1,4 @@
-﻿namespace FitnessTracker.Validation;
+﻿namespace FitnessTracker.CoreLogic.Validation;
 
 public interface IInputFormatValidator
 {

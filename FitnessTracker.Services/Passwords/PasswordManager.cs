@@ -1,6 +1,6 @@
-﻿namespace FitnessTracker.Passwords;
+﻿namespace FitnessTracker.CoreLogic.Passwords;
 
-internal class PasswordManager : IPasswordManager
+public class PasswordManager : IPasswordManager
 {
     public string HashPassword(string password)
     {
