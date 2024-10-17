@@ -14,5 +14,9 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\FitnessTracker.Domain\FitnessTracker.Domain.csproj" />
+	</ItemGroup>
+
 </Project>
 

@@ -1,4 +1,4 @@
-﻿using FitnessTracker.DataAccess.Entities;
+﻿using FitnessTracker.Domain;
 
 namespace FitnessTracker.DataAccess.Repositories;
 

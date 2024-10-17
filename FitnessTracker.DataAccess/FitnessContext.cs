@@ -1,4 +1,4 @@
-﻿using FitnessTracker.DataAccess.Entities;
+﻿using FitnessTracker.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessTracker.DataAccess;
@@ -25,10 +25,10 @@ public class FitnessContext : DbContext
             switch (entry.State)
             {
                 case EntityState.Added:
-                    entry.Entity.CreatedAtUtc = currentTime;
+                    entry.Entity.SetCreatedAtUtc(currentTime);
                     break;
                 case EntityState.Modified:
-                    entry.Entity.UpdatedAtUtc = currentTime;
+                    entry.Entity.SetUpdatedAtUtc(currentTime);
                     break;
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace FitnessTracker.DataAccess.Entities;
+﻿namespace FitnessTracker.Domain;
 
 public class ApplicationUser : BaseEntity
 {

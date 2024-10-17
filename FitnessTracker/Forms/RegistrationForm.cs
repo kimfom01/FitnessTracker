@@ -1,5 +1,5 @@
-﻿using FitnessTracker.DataAccess.Entities;
-using FitnessTracker.DataAccess.Repositories;
+﻿using FitnessTracker.DataAccess.Repositories;
+using FitnessTracker.Domain;
 using FitnessTracker.Forms;
 using FitnessTracker.Passwords;
 using FitnessTracker.Validation;
