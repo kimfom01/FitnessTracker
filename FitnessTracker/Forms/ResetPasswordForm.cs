@@ -1,5 +1,4 @@
-﻿using FitnessTracker.DataAccess;
-using FitnessTracker.DataAccess.Repositories;
+﻿using FitnessTracker.DataAccess.Repositories;
 using FitnessTracker.Passwords;
 using FitnessTracker.Validation;
 
@@ -12,13 +11,13 @@ public partial class ResetPasswordForm : Form
     private readonly IUserRepository _userRepository;
     private readonly string _username;
 
-    public ResetPasswordForm(string username)
+    public ResetPasswordForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository, string username)
     {
         InitializeComponent();
-        
-        _inputFormatValidator = new InputFormatValidator();
-        _passwordManager = new PasswordManager();
-        _userRepository = new UserRepository(new FitnessContext());
+
+        _inputFormatValidator = inputFormatValidator;
+        _passwordManager = passwordManager;
+        _userRepository = userRepository;
         _username = username;
     }
 
@@ -85,7 +84,9 @@ public partial class ResetPasswordForm : Form
     {
         var loginThread = new Thread(() =>
         {
-            Application.Run(new LoginForm());
+            var loginForm = FormFactory.CreateLoginForm();
+
+            Application.Run(loginForm);
         });
 
         loginThread.Start();

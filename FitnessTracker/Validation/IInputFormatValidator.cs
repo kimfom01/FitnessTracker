@@ -1,6 +1,6 @@
 ﻿namespace FitnessTracker.Validation;
 
-internal interface IInputFormatValidator
+public interface IInputFormatValidator
 {
     bool ValidatePasswordFormat(string password);
     bool ValidatePasswordLength(string password);

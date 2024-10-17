@@ -1,6 +1,6 @@
-﻿using FitnessTracker.DataAccess;
-using FitnessTracker.DataAccess.Entities;
+﻿using FitnessTracker.DataAccess.Entities;
 using FitnessTracker.DataAccess.Repositories;
+using FitnessTracker.Forms;
 using FitnessTracker.Passwords;
 using FitnessTracker.Validation;
 
@@ -12,13 +12,13 @@ public partial class RegistrationForm : Form
     private readonly IPasswordManager _passwordManager;
     private readonly IUserRepository _userRepository;
 
-    public RegistrationForm()
+    public RegistrationForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository)
     {
         InitializeComponent();
 
-        _inputFormatValidator = new InputFormatValidator();
-        _passwordManager = new PasswordManager();
-        _userRepository = new UserRepository(new FitnessContext());
+        _inputFormatValidator = inputFormatValidator;
+        _passwordManager = passwordManager;
+        _userRepository = userRepository;
     }
 
     private void registerBtn_Click(object sender, EventArgs e)
@@ -67,7 +67,9 @@ public partial class RegistrationForm : Form
     {
         var loginThread = new Thread(() =>
         {
-            Application.Run(new LoginForm());
+            var loginForm = FormFactory.CreateLoginForm();
+
+            Application.Run(loginForm);
         });
 
         loginThread.Start();

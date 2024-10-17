@@ -1,6 +1,6 @@
 ﻿namespace FitnessTracker.Passwords;
 
-internal interface IPasswordManager
+public interface IPasswordManager
 {
     string HashPassword(string password);
     bool VerifyPassword(string password, string hash);

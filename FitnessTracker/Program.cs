@@ -1,4 +1,5 @@
 using FitnessTracker.DataAccess;
+using FitnessTracker.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessTracker;
@@ -16,6 +17,9 @@ internal static class Program
         ApplicationConfiguration.Initialize();
         var dbContext = new FitnessContext();
         dbContext.Database.Migrate();
-        Application.Run(new LoginForm());
+
+        var loginForm = FormFactory.CreateLoginForm();
+
+        Application.Run(loginForm);
     }
 }

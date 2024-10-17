@@ -1,4 +1,3 @@
-using FitnessTracker.DataAccess;
 using FitnessTracker.DataAccess.Repositories;
 using FitnessTracker.Forms;
 using FitnessTracker.Passwords;
@@ -15,13 +14,13 @@ public partial class LoginForm : Form
     private const int MaxLoginAttempts = 3;
     private const int NoAttempts = 0;
 
-    public LoginForm()
+    public LoginForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository)
     {
         InitializeComponent();
 
-        _inputFormatValidator = new InputFormatValidator();
-        _passwordManager = new PasswordManager();
-        _userRepository = new UserRepository(new FitnessContext());
+        _inputFormatValidator = inputFormatValidator;
+        _passwordManager = passwordManager;
+        _userRepository = userRepository;
     }
 
     private void loginBtn_Click(object sender, EventArgs e)
@@ -83,7 +82,9 @@ public partial class LoginForm : Form
     {
         var registrationThread = new Thread(() =>
         {
-            Application.Run(new RegistrationForm());
+            var registrationForm = FormFactory.CreateRegistrationForm();
+
+            Application.Run(registrationForm);
         });
 
         registrationThread.Start();
@@ -95,7 +96,9 @@ public partial class LoginForm : Form
     {
         var resetPasswordThread = new Thread(() =>
         {
-            Application.Run(new ResetPasswordForm(username));
+            var resetPasswordForm = FormFactory.CreateResetPasswordForm(username);
+
+            Application.Run(resetPasswordForm);
         });
 
         resetPasswordThread.Start();
