@@ -24,11 +24,12 @@ public static class FormFactory
     {
         var dbContext = new FitnessContext();
 
-        var _inputFormatValidator = new InputFormatValidator();
-        var _passwordManager = new PasswordManager();
-        var _userRepository = new UserRepository(dbContext);
+        IInputFormatValidator _inputFormatValidator = new InputFormatValidator();
+        IPasswordManager _passwordManager = new PasswordManager();
+        IUserRepository _userRepository = new UserRepository(dbContext);
+        IAuthenticationService authenticationService = new AuthenticationService(_passwordManager, _userRepository);
 
-        return new RegistrationForm(_inputFormatValidator, _passwordManager, _userRepository);
+        return new RegistrationForm(authenticationService, _inputFormatValidator);
     }
 
     public static ResetPasswordForm CreateResetPasswordForm(string username)

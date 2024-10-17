@@ -1,24 +1,20 @@
-﻿using FitnessTracker.CoreLogic.Passwords;
+﻿using FitnessTracker.CoreLogic.Exceptions;
+using FitnessTracker.CoreLogic.Services;
 using FitnessTracker.CoreLogic.Validation;
-using FitnessTracker.DataAccess.Repositories;
-using FitnessTracker.Domain;
 using FitnessTracker.Forms;
 
 namespace FitnessTracker;
 
 public partial class RegistrationForm : Form
 {
+    private readonly IAuthenticationService _authenticationService;
     private readonly IInputFormatValidator _inputFormatValidator;
-    private readonly IPasswordManager _passwordManager;
-    private readonly IUserRepository _userRepository;
 
-    public RegistrationForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository)
+    public RegistrationForm(IAuthenticationService authenticationService, IInputFormatValidator inputFormatValidator)
     {
         InitializeComponent();
-
+        _authenticationService = authenticationService;
         _inputFormatValidator = inputFormatValidator;
-        _passwordManager = passwordManager;
-        _userRepository = userRepository;
     }
 
     private void registerBtn_Click(object sender, EventArgs e)
@@ -32,23 +28,21 @@ public partial class RegistrationForm : Form
 
         try
         {
-            string username = usernameTxt.Text;
+            var username = usernameTxt.Text;
 
             var phoneNumber = phoneNumberTxt.Text;
 
-            if (_userRepository.CheckIfUserExist(username))
-            {
-                MessageBox.Show("This username is already taken!");
-                return;
-            }
+            var password = passwordTxt.Text;
 
-            string hashedPassword = _passwordManager.HashPassword(passwordTxt.Text);
-
-            var added = _userRepository.AddUser(ApplicationUser.Create(username, hashedPassword, phoneNumber));
-            _userRepository.SaveChanges();
+            _authenticationService.RegisterUser(username, phoneNumber, password);
 
             MessageBox.Show($"Account Registered!\nYou can proceed to login");
             OpenLoginForm();
+        }
+        catch(DuplicateException ex)
+        {
+            MessageBox.Show(ex.Message);
+            return;
         }
         catch (Exception ex)
         {

@@ -53,6 +53,11 @@ public partial class LoginForm : Form
             MessageBox.Show(ex.Message);
             return;
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occured: {ex.Message}");
+            return;
+        }
     }
 
     private void registerLbl_Click(object sender, EventArgs e)

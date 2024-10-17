@@ -2,6 +2,7 @@
 {
     public interface IAuthenticationService
     {
-        bool LoginUser(string username, string password);
+        void LoginUser(string username, string password);
+        void RegisterUser(string username, string phoneNumber, string password);
     }
 }

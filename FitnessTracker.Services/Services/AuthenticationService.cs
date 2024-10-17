@@ -1,6 +1,7 @@
 ﻿using FitnessTracker.CoreLogic.Exceptions;
 using FitnessTracker.CoreLogic.Passwords;
 using FitnessTracker.DataAccess.Repositories;
+using FitnessTracker.Domain;
 
 namespace FitnessTracker.CoreLogic.Services;
 
@@ -12,16 +13,13 @@ public class AuthenticationService : IAuthenticationService
     private const int MaxLoginAttempts = 3;
     private const int NoAttempts = 0;
 
-    public AuthenticationService(
-        IPasswordManager passwordManager,
-        IUserRepository userRepository
-    )
+    public AuthenticationService(IPasswordManager passwordManager, IUserRepository userRepository)
     {
         _passwordManager = passwordManager;
         _userRepository = userRepository;
     }
 
-    public bool LoginUser(string username, string password)
+    public void LoginUser(string username, string password)
     {
         var user = _userRepository.GetUser(username);
 
@@ -56,7 +54,18 @@ public class AuthenticationService : IAuthenticationService
             user.ResetLoginAttempts();
             _userRepository.SaveChanges();
         }
+    }
 
-        return true;
+    public void RegisterUser(string username, string phoneNumber, string password)
+    {
+        if (_userRepository.CheckIfUserExist(username))
+        {
+            throw new DuplicateException("This username is already taken!");
+        }
+
+        string hashedPassword = _passwordManager.HashPassword(password);
+
+        var added = _userRepository.AddUser(ApplicationUser.Create(username, hashedPassword, phoneNumber));
+        _userRepository.SaveChanges();
     }
 }
