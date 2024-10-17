@@ -68,4 +68,27 @@ public class AuthenticationService : IAuthenticationService
         var added = _userRepository.AddUser(ApplicationUser.Create(username, hashedPassword, phoneNumber));
         _userRepository.SaveChanges();
     }
+
+    public void ResetPassword(string username, string phoneNumber, string newPassword)
+    {
+        var user = _userRepository.GetUser(username);
+
+        if (user is null)
+        {
+            throw new NotFoundException("Error! Something is really really wrong... this should not be possible");
+        }
+
+        bool phoneNumberExists = _userRepository.CheckIfPhoneNumberExists(username, phoneNumber);
+
+        if (!phoneNumberExists)
+        {
+            throw new InvalidPhoneNumberException("Error! Phone number is wrong.\nPlease enter your phone number or create a new account");
+        }
+
+        var hash = _passwordManager.HashPassword(newPassword);
+
+        user.UpdatePassword(hash);
+        user.UnLockAccount();
+        _userRepository.SaveChanges();
+    }
 }

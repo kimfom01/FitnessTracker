@@ -1,23 +1,20 @@
-﻿using FitnessTracker.CoreLogic.Passwords;
+﻿using FitnessTracker.CoreLogic.Exceptions;
+using FitnessTracker.CoreLogic.Services;
 using FitnessTracker.CoreLogic.Validation;
-using FitnessTracker.DataAccess.Repositories;
 
 namespace FitnessTracker.Forms;
 
 public partial class ResetPasswordForm : Form
 {
+    private readonly IAuthenticationService _authenticationService;
     private readonly IInputFormatValidator _inputFormatValidator;
-    private readonly IPasswordManager _passwordManager;
-    private readonly IUserRepository _userRepository;
     private readonly string _username;
 
-    public ResetPasswordForm(IInputFormatValidator inputFormatValidator, IPasswordManager passwordManager, IUserRepository userRepository, string username)
+    public ResetPasswordForm(IAuthenticationService authenticationService, IInputFormatValidator inputFormatValidator, string username)
     {
         InitializeComponent();
-
+        _authenticationService = authenticationService;
         _inputFormatValidator = inputFormatValidator;
-        _passwordManager = passwordManager;
-        _userRepository = userRepository;
         _username = username;
     }
 
@@ -31,30 +28,26 @@ public partial class ResetPasswordForm : Form
         }
 
         var phoneNumber = phoneNumberTxt.Text;
-        var password = _passwordManager.HashPassword(passwordTxt.Text);
+        var password = passwordTxt.Text;
 
-        var user = _userRepository.GetUser(_username);
-
-        if (user is null)
+        try
         {
-            MessageBox.Show("Error! Something is really really wrong... this should not be possible");
+            _authenticationService.ResetPassword(_username, phoneNumber, password);
+
+            MessageBox.Show("Successfully updated your password!\nYou can now login and continue using your account");
+            OpenLoginForm();
+        }
+        catch (NotFoundException ex)
+        {
+            MessageBox.Show(ex.Message);
             Close();
             return;
         }
-
-        bool phoneNumberExists = _userRepository.CheckIfPhoneNumberExists(_username, phoneNumber);
-
-        if (!phoneNumberExists)
+        catch(InvalidPhoneNumberException ex)
         {
-            MessageBox.Show("Error! Phone number is wrong.\nPlease enter your phone number or create a new account");
+            MessageBox.Show(ex.Message);
             return;
         }
-
-        user.UpdatePassword(password);
-        user.UnLockAccount();
-        _userRepository.SaveChanges();
-        MessageBox.Show("Successfully updated your password!\nYou can now login and continue using your account");
-        OpenLoginForm();
     }
 
     private bool ValidateFormInput()

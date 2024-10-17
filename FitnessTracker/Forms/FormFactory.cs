@@ -12,34 +12,37 @@ public static class FormFactory
     {
         var dbContext = new FitnessContext();
 
-        IInputFormatValidator _inputFormatValidator = new InputFormatValidator();
-        IPasswordManager _passwordManager = new PasswordManager();
-        IUserRepository _userRepository = new UserRepository(dbContext);
-        IAuthenticationService authenticationService = new AuthenticationService(_passwordManager, _userRepository);
+        IPasswordManager passwordManager = new PasswordManager();
+        IUserRepository userRepository = new UserRepository(dbContext);
+        IAuthenticationService authenticationService = new AuthenticationService(passwordManager, userRepository);
 
-        return new LoginForm(authenticationService, _inputFormatValidator);
+        IInputFormatValidator inputFormatValidator = new InputFormatValidator();
+        return new LoginForm(authenticationService, inputFormatValidator);
     }
 
     public static RegistrationForm CreateRegistrationForm()
     {
         var dbContext = new FitnessContext();
 
-        IInputFormatValidator _inputFormatValidator = new InputFormatValidator();
-        IPasswordManager _passwordManager = new PasswordManager();
-        IUserRepository _userRepository = new UserRepository(dbContext);
-        IAuthenticationService authenticationService = new AuthenticationService(_passwordManager, _userRepository);
+        IPasswordManager passwordManager = new PasswordManager();
+        IUserRepository userRepository = new UserRepository(dbContext);
 
-        return new RegistrationForm(authenticationService, _inputFormatValidator);
+        IInputFormatValidator inputFormatValidator = new InputFormatValidator();
+        IAuthenticationService authenticationService = new AuthenticationService(passwordManager, userRepository);
+
+        return new RegistrationForm(authenticationService, inputFormatValidator);
     }
 
     public static ResetPasswordForm CreateResetPasswordForm(string username)
     {
         var dbContext = new FitnessContext();
 
-        var _inputFormatValidator = new InputFormatValidator();
-        var _passwordManager = new PasswordManager();
-        var _userRepository = new UserRepository(dbContext);
+        IPasswordManager passwordManager = new PasswordManager();
+        IUserRepository userRepository = new UserRepository(dbContext);
 
-        return new ResetPasswordForm(_inputFormatValidator, _passwordManager, _userRepository, username);
+        IInputFormatValidator inputFormatValidator = new InputFormatValidator();
+        IAuthenticationService authenticationService = new AuthenticationService(passwordManager, userRepository);
+
+        return new ResetPasswordForm(authenticationService, inputFormatValidator, username);
     }
 }
