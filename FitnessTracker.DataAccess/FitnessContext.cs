@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Domain;
+using FitnessTracker.Domain.Activities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessTracker.DataAccess;
@@ -6,6 +7,9 @@ namespace FitnessTracker.DataAccess;
 public class FitnessContext : DbContext
 {
     public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<Goal> Goals { get; set; }
+    public DbSet<Swimming> Swimmings { get; set; }
+    public DbSet<Walking> Walkings { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
