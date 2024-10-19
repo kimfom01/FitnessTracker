@@ -19,7 +19,7 @@ public class AuthenticationService : IAuthenticationService
         _userRepository = userRepository;
     }
 
-    public void LoginUser(string username, string password)
+    public int LoginUser(string username, string password)
     {
         var user = _userRepository.GetUser(username);
 
@@ -54,6 +54,8 @@ public class AuthenticationService : IAuthenticationService
             user.ResetLoginAttempts();
             _userRepository.SaveChanges();
         }
+
+        return user.Id;
     }
 
     public void RegisterUser(string username, string phoneNumber, string password)

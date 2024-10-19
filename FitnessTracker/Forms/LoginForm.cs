@@ -33,9 +33,11 @@ public partial class LoginForm : Form
 
         try
         {
-            _authenticationService.LoginUser(username, password);
+            var userId = _authenticationService.LoginUser(username, password);
 
             MessageBox.Show("User successfully logged in!");
+
+            LaunchGoalForm(userId);
         }
         catch (NotFoundException ex)
         {
@@ -84,6 +86,20 @@ public partial class LoginForm : Form
         });
 
         resetPasswordThread.Start();
+
+        Close();
+    }
+
+    private void LaunchGoalForm(int userId)
+    {
+        var goalFormThread = new Thread(() =>
+        {
+            var goalForm = FormFactory.CreateGoalForm(userId);
+
+            Application.Run(goalForm);
+        });
+
+        goalFormThread.Start();
 
         Close();
     }
