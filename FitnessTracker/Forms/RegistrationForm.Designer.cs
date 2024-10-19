@@ -139,10 +139,12 @@ partial class RegistrationForm
         Controls.Add(registrationTitleLbl);
         Controls.Add(registerBtn);
         Font = new Font("Segoe UI", 14F);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Margin = new Padding(5);
+        MaximizeBox = false;
         Name = "RegistrationForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Registration Form";
+        Text = "Registration";
         ResumeLayout(false);
         PerformLayout();
     }

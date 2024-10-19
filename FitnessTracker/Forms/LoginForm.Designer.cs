@@ -1,6 +1,4 @@
-﻿
-
-namespace FitnessTracker;
+﻿namespace FitnessTracker;
 
 partial class LoginForm
 {
@@ -120,10 +118,12 @@ partial class LoginForm
         Controls.Add(loginTitleLbl);
         Controls.Add(loginBtn);
         Font = new Font("Segoe UI", 14F);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Margin = new Padding(5);
+        MaximizeBox = false;
         Name = "LoginForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Login Form";
+        Text = "Login";
         ResumeLayout(false);
         PerformLayout();
     }

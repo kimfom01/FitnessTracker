@@ -104,10 +104,12 @@ partial class ResetPasswordForm
         Controls.Add(resetTitleLbl);
         Controls.Add(resetBtn);
         Font = new Font("Segoe UI", 14F);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Margin = new Padding(5);
+        MaximizeBox = false;
         Name = "ResetPasswordForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Reset Password Form";
+        Text = "Reset Password";
         ResumeLayout(false);
         PerformLayout();
     }

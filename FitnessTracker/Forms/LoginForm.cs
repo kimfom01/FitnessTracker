@@ -42,13 +42,13 @@ public partial class LoginForm : Form
             MessageBox.Show(ex.Message);
             return;
         }
-        catch(AccountLockedException ex)
+        catch (AccountLockedException ex)
         {
             MessageBox.Show(ex.Message);
             InitiateAccountRecovery(username);
             return;
         }
-        catch(InvalidPasswordExeption ex)
+        catch (InvalidPasswordExeption ex)
         {
             MessageBox.Show(ex.Message);
             return;
