@@ -54,4 +54,9 @@ public static class FormFactory
 
         return new GoalForm(goalService, userId);
     }
+
+    public static ActivitiesForm CreateActivitiesForm(int userId)
+    {
+        return new ActivitiesForm();
+    }
 }
