@@ -10,6 +10,9 @@ public class FitnessContext : DbContext
     public DbSet<Goal> Goals { get; set; }
     public DbSet<Swimming> Swimmings { get; set; }
     public DbSet<Walking> Walkings { get; set; }
+    public DbSet<Cycling> Cyclings { get; set; }
+    public DbSet<Running> Runnings { get; set; }
+    public DbSet<WeightLifting> WeightLiftings { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -10,9 +10,12 @@ public class ApplicationUser : BaseEntity
     public int LoginAttempts { get; private set; }
     public bool IsLocked { get; private set; }
 
-    public ICollection<Goal> Goals { get; private set; }
-    public ICollection<Walking> Walkings { get; private set; }
-    public ICollection<Swimming> Swimmings { get; private set; }
+    public IReadOnlyList<Goal> Goals { get; private set; }
+    public IReadOnlyList<Walking> Walkings { get; private set; }
+    public IReadOnlyList<Swimming> Swimmings { get; private set; }
+    public IReadOnlyList<Cycling> Cyclings { get; private set; }
+    public IReadOnlyList<Running> Runnings { get; private set; }
+    public IReadOnlyList<WeightLifting> WeightLiftings { get; private set; }
 
     private ApplicationUser(string username, string password, string phoneNumber)
     {
@@ -22,6 +25,9 @@ public class ApplicationUser : BaseEntity
         Goals = new List<Goal>();
         Walkings = new List<Walking>();
         Swimmings = new List<Swimming>();
+        Cyclings = new List<Cycling>();
+        Runnings = new List<Running>();
+        WeightLiftings = new List<WeightLifting>();
     }
 
     public static ApplicationUser Create(string username, string password, string phoneNumber)
