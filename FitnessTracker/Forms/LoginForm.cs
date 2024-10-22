@@ -37,7 +37,7 @@ public partial class LoginForm : Form
 
             MessageBox.Show("User successfully logged in!");
 
-            LaunchActivitiesForm(userId);
+            LaunchGoalForm(userId);
         }
         catch (NotFoundException ex)
         {
@@ -101,19 +101,6 @@ public partial class LoginForm : Form
 
         goalFormThread.Start();
 
-        Close();
-    }
-
-    private void LaunchActivitiesForm(int userId)
-    {
-        var activitiesFormThread = new Thread(() =>
-        {
-            var activitiesForm = FormFactory.CreateActivitiesForm(userId);
-
-            Application.Run(activitiesForm);
-        });
-
-        activitiesFormThread.Start();
         Close();
     }
 

@@ -46,17 +46,12 @@ public static class FormFactory
         return new ResetPasswordForm(authenticationService, inputFormatValidator, username);
     }
 
-    public static GoalForm CreateGoalForm(int userId)
+    public static FitnessTrackerForm CreateGoalForm(int userId)
     {
         var dbContext = new FitnessContext();
         IGoalRepository goalRepository = new GoalRepository(dbContext);
         IGoalService goalService = new GoalService(goalRepository);
 
-        return new GoalForm(goalService, userId);
-    }
-
-    public static ActivitiesForm CreateActivitiesForm(int userId)
-    {
-        return new ActivitiesForm();
+        return new FitnessTrackerForm(goalService, userId);
     }
 }

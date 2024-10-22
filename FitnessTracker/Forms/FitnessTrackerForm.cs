@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 
 namespace FitnessTracker.Forms;
 
-public partial class GoalForm : Form
+public partial class FitnessTrackerForm : Form
 {
     private readonly IGoalService _goalService;
     private readonly int _userId;
 
-    public GoalForm(IGoalService goalService, int userId)
+    public FitnessTrackerForm(IGoalService goalService, int userId)
     {
         InitializeComponent();
 
@@ -33,12 +33,6 @@ public partial class GoalForm : Form
 
         await LoadGoals();
         ResetCreateGoalForm();
-    }
-
-    private async void GoalForm_Load(object sender, EventArgs e)
-    {
-        await LoadGoals();
-        await LoadQuote();
     }
 
     private async Task LoadGoals()
@@ -70,6 +64,17 @@ public partial class GoalForm : Form
 
         quoteLbl.Text = $"{quoteResponse.Quote}\n-{quoteResponse.Author}";
     }
+
+    private void tabPage2_Enter(object sender, EventArgs e)
+    {
+        
+    }
+
+    private async void goalsTab_Enter(object sender, EventArgs e)
+    {
+        await LoadGoals();
+        await LoadQuote();
+    }
 }
 
 record QuoteObject
@@ -77,7 +82,7 @@ record QuoteObject
     [JsonPropertyName("id")]
     public int Id { get; set; }
     [JsonPropertyName("quote")]
-    public string Quote { get; set; }
+    public string Quote { get; set; } = string.Empty;
     [JsonPropertyName("author")]
-    public string Author { get; set; }
+    public string Author { get; set; } = string.Empty;
 }
