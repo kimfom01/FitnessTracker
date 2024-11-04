@@ -1,4 +1,5 @@
-﻿using FitnessTracker.CoreLogic.Services;
+﻿using FitnessTracker.CoreLogic.Exceptions;
+using FitnessTracker.CoreLogic.Services;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
@@ -28,8 +29,17 @@ public partial class FitnessTrackerForm : Form
         var title = goalTitleTxt.Text;
         var target = Convert.ToDouble(caloriesTargetUpDown.Value);
 
-        var goal = await _goalService.CreateNew(_userId, title, target);
-        MessageBox.Show($"Goal: {goal.Title} successfully created");
+        try
+        {
+            var goal = await _goalService.CreateNew(_userId, title, target);
+            MessageBox.Show($"Goal: {goal.Title} successfully created");
+        }
+        catch (DuplicateException ex)
+        {
+
+            MessageBox.Show(ex.Message);
+            return;
+        }
 
         await LoadGoals();
         ResetCreateGoalForm();
@@ -65,16 +75,26 @@ public partial class FitnessTrackerForm : Form
         quoteLbl.Text = $"{quoteResponse.Quote}\n-{quoteResponse.Author}";
     }
 
-    private void tabPage2_Enter(object sender, EventArgs e)
-    {
-        
-    }
-
     private async void goalsTab_Enter(object sender, EventArgs e)
     {
         await LoadGoals();
         await LoadQuote();
     }
+
+    private void activitiesTab_Enter(object sender, EventArgs e)
+    {
+
+    }
+}
+
+enum ActivityType
+{
+    Cycling,
+    Running,
+    Swimming,
+    Walking,
+    WeightLifting,
+    Yoga
 }
 
 record QuoteObject

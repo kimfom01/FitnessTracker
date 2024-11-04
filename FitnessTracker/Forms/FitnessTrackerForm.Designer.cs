@@ -41,7 +41,7 @@ partial class FitnessTrackerForm
         quoteLabelTitle = new Label();
         quoteLbl = new Label();
         fitnessTrackerTabControl = new TabControl();
-        activitiestab = new TabPage();
+        activitiesTab = new TabPage();
         label1 = new Label();
         goalsTab = new TabPage();
         profileTab = new TabPage();
@@ -49,7 +49,7 @@ partial class FitnessTrackerForm
         ((System.ComponentModel.ISupportInitialize)caloriesTargetUpDown).BeginInit();
         ((System.ComponentModel.ISupportInitialize)goalsGridView).BeginInit();
         fitnessTrackerTabControl.SuspendLayout();
-        activitiestab.SuspendLayout();
+        activitiesTab.SuspendLayout();
         goalsTab.SuspendLayout();
         profileTab.SuspendLayout();
         SuspendLayout();
@@ -169,7 +169,7 @@ partial class FitnessTrackerForm
         // 
         // fitnessTrackerTabControl
         // 
-        fitnessTrackerTabControl.Controls.Add(activitiestab);
+        fitnessTrackerTabControl.Controls.Add(activitiesTab);
         fitnessTrackerTabControl.Controls.Add(goalsTab);
         fitnessTrackerTabControl.Controls.Add(profileTab);
         fitnessTrackerTabControl.Location = new Point(12, 12);
@@ -178,16 +178,17 @@ partial class FitnessTrackerForm
         fitnessTrackerTabControl.Size = new Size(1286, 698);
         fitnessTrackerTabControl.TabIndex = 13;
         // 
-        // activitiestab
+        // activitiesTab
         // 
-        activitiestab.Controls.Add(label1);
-        activitiestab.Location = new Point(4, 34);
-        activitiestab.Name = "activitiestab";
-        activitiestab.Padding = new Padding(3);
-        activitiestab.Size = new Size(1278, 660);
-        activitiestab.TabIndex = 1;
-        activitiestab.Text = "Activities";
-        activitiestab.UseVisualStyleBackColor = true;
+        activitiesTab.Controls.Add(label1);
+        activitiesTab.Location = new Point(4, 34);
+        activitiesTab.Name = "activitiesTab";
+        activitiesTab.Padding = new Padding(3);
+        activitiesTab.Size = new Size(1278, 660);
+        activitiesTab.TabIndex = 1;
+        activitiesTab.Text = "Activities";
+        activitiesTab.UseVisualStyleBackColor = true;
+        activitiesTab.Enter += activitiesTab_Enter;
         // 
         // label1
         // 
@@ -210,10 +211,10 @@ partial class FitnessTrackerForm
         goalsTab.Controls.Add(goalTitleLbl);
         goalsTab.Controls.Add(caloriesTargetUpDown);
         goalsTab.Controls.Add(goalTitleTxt);
-        goalsTab.Location = new Point(4, 34);
+        goalsTab.Location = new Point(4, 24);
         goalsTab.Name = "goalsTab";
         goalsTab.Padding = new Padding(3);
-        goalsTab.Size = new Size(1278, 660);
+        goalsTab.Size = new Size(1278, 670);
         goalsTab.TabIndex = 0;
         goalsTab.Text = "Goals";
         goalsTab.UseVisualStyleBackColor = true;
@@ -222,10 +223,10 @@ partial class FitnessTrackerForm
         // profileTab
         // 
         profileTab.Controls.Add(label2);
-        profileTab.Location = new Point(4, 34);
+        profileTab.Location = new Point(4, 24);
         profileTab.Name = "profileTab";
         profileTab.Padding = new Padding(3);
-        profileTab.Size = new Size(1278, 660);
+        profileTab.Size = new Size(1278, 670);
         profileTab.TabIndex = 2;
         profileTab.Text = "Profile";
         profileTab.UseVisualStyleBackColor = true;
@@ -256,8 +257,8 @@ partial class FitnessTrackerForm
         ((System.ComponentModel.ISupportInitialize)caloriesTargetUpDown).EndInit();
         ((System.ComponentModel.ISupportInitialize)goalsGridView).EndInit();
         fitnessTrackerTabControl.ResumeLayout(false);
-        activitiestab.ResumeLayout(false);
-        activitiestab.PerformLayout();
+        activitiesTab.ResumeLayout(false);
+        activitiesTab.PerformLayout();
         goalsTab.ResumeLayout(false);
         goalsTab.PerformLayout();
         profileTab.ResumeLayout(false);
@@ -280,7 +281,7 @@ partial class FitnessTrackerForm
     private Label quoteLbl;
     private TabControl fitnessTrackerTabControl;
     private TabPage goalsTab;
-    private TabPage activitiestab;
+    private TabPage activitiesTab;
     private TabPage profileTab;
     private Label label1;
     private Label label2;

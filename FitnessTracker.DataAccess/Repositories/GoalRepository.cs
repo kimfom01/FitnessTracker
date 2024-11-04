@@ -12,6 +12,15 @@ public class GoalRepository : IGoalRepository
         _fitnessContext = fitnessContext;
     }
 
+    public bool CheckIfMonthGoalExist(int userId)
+    {
+        return _fitnessContext.Goals
+            .Where(goal => goal.UserId == userId)
+            .Where(goal => goal.Year == DateTime.UtcNow.Year)
+            .Where(goal => goal.Month == DateTime.UtcNow.Month)
+            .Any();
+    }
+
     public async Task<Goal> CreateGoal(Goal goal, CancellationToken cancellationToken)
     {
         var entry = await _fitnessContext.Goals.AddAsync(goal, cancellationToken);

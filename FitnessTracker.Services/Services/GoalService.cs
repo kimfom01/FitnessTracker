@@ -1,4 +1,5 @@
-﻿using FitnessTracker.DataAccess.Repositories;
+﻿using FitnessTracker.CoreLogic.Exceptions;
+using FitnessTracker.DataAccess.Repositories;
 using FitnessTracker.Domain;
 
 namespace FitnessTracker.CoreLogic.Services;
@@ -14,6 +15,11 @@ public class GoalService : IGoalService
 
     public async Task<Goal> CreateNew(int userId, string title, double caloriesTarget, CancellationToken cancellationToken = default)
     {
+        if (_goalsRepository.CheckIfMonthGoalExist(userId))
+        {
+            throw new DuplicateException("This month's goal has been created! Feel free to edit it");
+        }
+
         var newGoal = Goal.Create(userId, title, caloriesTarget);
 
         var createdGoal = await _goalsRepository.CreateGoal(newGoal, cancellationToken);

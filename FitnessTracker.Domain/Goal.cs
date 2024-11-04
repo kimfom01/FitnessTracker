@@ -9,6 +9,8 @@ public class Goal : BaseEntity
     public string Title { get; private set; }
     public double CaloriesTarget { get; private set; }
     public double Progress { get; private set; }
+    public int Month { get; private set; }
+    public int Year { get; private set; }
 
     public IReadOnlyList<Walking> Walkings { get; private set; }
     public IReadOnlyList<Swimming> Swimmings { get; private set; }
@@ -25,6 +27,8 @@ public class Goal : BaseEntity
         Swimmings = new List<Swimming>();
         Cyclings = new List<Cycling>();
         Runnings = new List<Running>();
+        Month = DateTime.UtcNow.Month;
+        Year = DateTime.UtcNow.Year;
         WeightLiftings = new List<WeightLifting>();
     }
 
