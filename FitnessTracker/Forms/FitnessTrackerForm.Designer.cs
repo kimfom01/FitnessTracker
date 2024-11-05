@@ -46,6 +46,12 @@ partial class FitnessTrackerForm
         goalsTab = new TabPage();
         profileTab = new TabPage();
         label2 = new Label();
+        logCyclingBtn = new Button();
+        logRunningBtn = new Button();
+        logSwimmingBtn = new Button();
+        logWalkingBtn = new Button();
+        logWeightLiftingBtn = new Button();
+        logYogaBtn = new Button();
         ((System.ComponentModel.ISupportInitialize)caloriesTargetUpDown).BeginInit();
         ((System.ComponentModel.ISupportInitialize)goalsGridView).BeginInit();
         fitnessTrackerTabControl.SuspendLayout();
@@ -180,6 +186,12 @@ partial class FitnessTrackerForm
         // 
         // activitiesTab
         // 
+        activitiesTab.Controls.Add(logYogaBtn);
+        activitiesTab.Controls.Add(logWeightLiftingBtn);
+        activitiesTab.Controls.Add(logWalkingBtn);
+        activitiesTab.Controls.Add(logSwimmingBtn);
+        activitiesTab.Controls.Add(logRunningBtn);
+        activitiesTab.Controls.Add(logCyclingBtn);
         activitiesTab.Controls.Add(label1);
         activitiesTab.Location = new Point(4, 34);
         activitiesTab.Name = "activitiesTab";
@@ -211,10 +223,10 @@ partial class FitnessTrackerForm
         goalsTab.Controls.Add(goalTitleLbl);
         goalsTab.Controls.Add(caloriesTargetUpDown);
         goalsTab.Controls.Add(goalTitleTxt);
-        goalsTab.Location = new Point(4, 24);
+        goalsTab.Location = new Point(4, 34);
         goalsTab.Name = "goalsTab";
         goalsTab.Padding = new Padding(3);
-        goalsTab.Size = new Size(1278, 670);
+        goalsTab.Size = new Size(1278, 660);
         goalsTab.TabIndex = 0;
         goalsTab.Text = "Goals";
         goalsTab.UseVisualStyleBackColor = true;
@@ -240,6 +252,60 @@ partial class FitnessTrackerForm
         label2.Size = new Size(376, 25);
         label2.TabIndex = 0;
         label2.Text = "Still In Development Please Check Back Later";
+        // 
+        // logCyclingBtn
+        // 
+        logCyclingBtn.Location = new Point(29, 28);
+        logCyclingBtn.Name = "logCyclingBtn";
+        logCyclingBtn.Size = new Size(121, 40);
+        logCyclingBtn.TabIndex = 1;
+        logCyclingBtn.Text = "Log Cycling";
+        logCyclingBtn.UseVisualStyleBackColor = true;
+        // 
+        // logRunningBtn
+        // 
+        logRunningBtn.Location = new Point(164, 28);
+        logRunningBtn.Name = "logRunningBtn";
+        logRunningBtn.Size = new Size(129, 40);
+        logRunningBtn.TabIndex = 2;
+        logRunningBtn.Text = "Log Running";
+        logRunningBtn.UseVisualStyleBackColor = true;
+        // 
+        // logSwimmingBtn
+        // 
+        logSwimmingBtn.Location = new Point(301, 28);
+        logSwimmingBtn.Name = "logSwimmingBtn";
+        logSwimmingBtn.Size = new Size(147, 40);
+        logSwimmingBtn.TabIndex = 3;
+        logSwimmingBtn.Text = "Log Swimming";
+        logSwimmingBtn.UseVisualStyleBackColor = true;
+        // 
+        // logWalkingBtn
+        // 
+        logWalkingBtn.Location = new Point(29, 74);
+        logWalkingBtn.Name = "logWalkingBtn";
+        logWalkingBtn.Size = new Size(129, 40);
+        logWalkingBtn.TabIndex = 4;
+        logWalkingBtn.Text = "Log Walking";
+        logWalkingBtn.UseVisualStyleBackColor = true;
+        // 
+        // logWeightLiftingBtn
+        // 
+        logWeightLiftingBtn.Location = new Point(164, 74);
+        logWeightLiftingBtn.Name = "logWeightLiftingBtn";
+        logWeightLiftingBtn.Size = new Size(175, 40);
+        logWeightLiftingBtn.TabIndex = 5;
+        logWeightLiftingBtn.Text = "Log Weight Lifting";
+        logWeightLiftingBtn.UseVisualStyleBackColor = true;
+        // 
+        // logYogaBtn
+        // 
+        logYogaBtn.Location = new Point(345, 74);
+        logYogaBtn.Name = "logYogaBtn";
+        logYogaBtn.Size = new Size(103, 40);
+        logYogaBtn.TabIndex = 6;
+        logYogaBtn.Text = "Log Yoga";
+        logYogaBtn.UseVisualStyleBackColor = true;
         // 
         // FitnessTrackerForm
         // 
@@ -285,4 +351,10 @@ partial class FitnessTrackerForm
     private TabPage profileTab;
     private Label label1;
     private Label label2;
+    private Button logCyclingBtn;
+    private Button logWeightLiftingBtn;
+    private Button logWalkingBtn;
+    private Button logSwimmingBtn;
+    private Button logRunningBtn;
+    private Button logYogaBtn;
 }
