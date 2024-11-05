@@ -1,5 +1,6 @@
 ﻿using FitnessTracker.CoreLogic.Exceptions;
 using FitnessTracker.CoreLogic.Services;
+using FitnessTracker.Forms.Activities;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
@@ -84,6 +85,13 @@ public partial class FitnessTrackerForm : Form
     private void activitiesTab_Enter(object sender, EventArgs e)
     {
 
+    }
+
+    private void logCyclingBtn_Click(object sender, EventArgs e)
+    {
+        var logCyclingForm = new LogCyclingForm();
+
+        logCyclingForm.ShowDialog();
     }
 }
 

@@ -261,6 +261,7 @@ partial class FitnessTrackerForm
         logCyclingBtn.TabIndex = 1;
         logCyclingBtn.Text = "Log Cycling";
         logCyclingBtn.UseVisualStyleBackColor = true;
+        logCyclingBtn.Click += logCyclingBtn_Click;
         // 
         // logRunningBtn
         // 
