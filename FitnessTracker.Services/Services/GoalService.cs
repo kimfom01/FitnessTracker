@@ -17,7 +17,7 @@ public class GoalService : IGoalService
     {
         if (_goalsRepository.CheckIfMonthGoalExist(userId))
         {
-            throw new DuplicateException("This month's goal has been created! Feel free to edit it");
+            throw new DuplicateException("This month's goal has been set!");
         }
 
         var newGoal = Goal.Create(userId, title, caloriesTarget);
