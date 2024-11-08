@@ -1,4 +1,4 @@
-﻿namespace FitnessTracker;
+﻿namespace FitnessTracker.Forms;
 
 partial class RegistrationForm
 {

@@ -1,9 +1,8 @@
 using FitnessTracker.CoreLogic.Exceptions;
 using FitnessTracker.CoreLogic.Services;
 using FitnessTracker.CoreLogic.Validation;
-using FitnessTracker.Forms;
 
-namespace FitnessTracker;
+namespace FitnessTracker.Forms;
 
 public partial class LoginForm : Form
 {
