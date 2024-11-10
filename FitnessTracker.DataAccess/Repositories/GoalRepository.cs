@@ -36,12 +36,17 @@ public class GoalRepository : IGoalRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Goal?> GetGoalById(int id, int userId, CancellationToken cancellationToken)
+    public async Task<int?> GetCurrentMonthsGoalId(int userId, CancellationToken cancellationToken = default)
     {
-        return await _fitnessContext.Goals
-            .Where(goal => goal.Id == id)
+        var currentDate = DateTime.UtcNow;
+        
+        var currentMonthsGoal = await _fitnessContext.Goals
             .Where(goal => goal.UserId == userId)
+            .Where(goal => goal.Month == currentDate.Month)
+            .Where(goal => goal.Year == currentDate.Year)
             .FirstOrDefaultAsync(cancellationToken);
+        
+        return currentMonthsGoal?.Id;
     }
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken)

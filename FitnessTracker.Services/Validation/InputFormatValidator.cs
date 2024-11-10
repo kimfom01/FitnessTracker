@@ -67,4 +67,14 @@ public partial class InputFormatValidator : IInputFormatValidator
 
     [GeneratedRegex(@"^\d{10}$")]
     private static partial Regex PhoneNumberRegex();
+
+    public bool ValidateNumberDouble(string number)
+    {
+        return double.TryParse(number, out var num) && num > 0;
+    }
+
+    public bool ValidateNumberInt(string number)
+    {
+        return int.TryParse(number, out var num) && num > 0;
+    }
 }

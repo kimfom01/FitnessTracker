@@ -3,6 +3,7 @@ using FitnessTracker.DataAccess;
 using FitnessTracker.CoreLogic.Passwords;
 using FitnessTracker.CoreLogic.Validation;
 using FitnessTracker.CoreLogic.Services;
+using FitnessTracker.Forms.Activities;
 
 namespace FitnessTracker.Forms;
 
@@ -53,5 +54,16 @@ public static class FormFactory
         IGoalService goalService = new GoalService(goalRepository);
 
         return new FitnessTrackerForm(goalService, userId);
+    }
+
+    public static LogCyclingForm CreateLogCyclingForm(int userId)
+    {
+        var dbContext = new FitnessContext();
+        IGoalRepository goalRepository = new GoalRepository(dbContext);
+        ICyclingRepository cyclingRepository = new CyclingRepository(dbContext);
+        IActivitiesService activitiesService = new ActivitiesService(goalRepository, cyclingRepository);
+        IInputFormatValidator inputFormatValidator = new InputFormatValidator();
+        
+        return new LogCyclingForm(inputFormatValidator, activitiesService, userId);
     }
 }

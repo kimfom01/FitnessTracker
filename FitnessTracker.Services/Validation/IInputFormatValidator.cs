@@ -6,4 +6,6 @@ public interface IInputFormatValidator
     bool ValidatePasswordLength(string password);
     bool ValidatePhoneNumber(string phoneNumber);
     bool ValidateUsername(string username);
+    bool ValidateNumberDouble(string number);
+    bool ValidateNumberInt(string number);
 }

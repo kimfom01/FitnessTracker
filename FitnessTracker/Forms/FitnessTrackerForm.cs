@@ -1,6 +1,5 @@
 ﻿using FitnessTracker.CoreLogic.Exceptions;
 using FitnessTracker.CoreLogic.Services;
-using FitnessTracker.Forms.Activities;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
@@ -83,33 +82,18 @@ public partial class FitnessTrackerForm : Form
 
     private void activitiesTab_Enter(object sender, EventArgs e)
     {
-
     }
 
     private void logCyclingBtn_Click(object sender, EventArgs e)
     {
-        var logCyclingForm = new LogCyclingForm();
+        var logCyclingForm = FormFactory.CreateLogCyclingForm(_userId);
 
         logCyclingForm.ShowDialog();
     }
 }
 
-enum ActivityType
-{
-    Cycling,
-    Running,
-    Swimming,
-    Walking,
-    WeightLifting,
-    Yoga
-}
-
-record QuoteObject
-{
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
-    [JsonPropertyName("quote")]
-    public string Quote { get; set; } = string.Empty;
-    [JsonPropertyName("author")]
-    public string Author { get; set; } = string.Empty;
-}
+record QuoteObject(
+    [property: JsonPropertyName("id")] int Id,
+    [property: JsonPropertyName("quote")] string Quote,
+    [property: JsonPropertyName("author")] string Author
+);
