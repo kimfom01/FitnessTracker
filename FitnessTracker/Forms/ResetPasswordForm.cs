@@ -39,13 +39,13 @@ public partial class ResetPasswordForm : Form
         }
         catch (NotFoundException ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Close();
             return;
         }
         catch(InvalidPhoneNumberException ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
@@ -54,19 +54,19 @@ public partial class ResetPasswordForm : Form
     {
         if (!_inputFormatValidator.ValidatePhoneNumber(phoneNumberTxt.Text))
         {
-            MessageBox.Show("Invalid phone number format: Example 0972060814");
+            MessageBox.Show("Invalid phone number format: Example 0972060814", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
         if (!_inputFormatValidator.ValidatePasswordLength(passwordTxt.Text))
         {
-            MessageBox.Show("Invalid password length: Passwords must not exceed 12 characters");
+            MessageBox.Show("Invalid password length: Passwords must not exceed 12 characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
         if (!_inputFormatValidator.ValidatePasswordFormat(passwordTxt.Text))
         {
-            MessageBox.Show("Invalid password format: Passwords must contain at least 1 uppercase and 1 lower case character");
+            MessageBox.Show("Invalid password format: Passwords must contain at least 1 uppercase and 1 lower case character", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 

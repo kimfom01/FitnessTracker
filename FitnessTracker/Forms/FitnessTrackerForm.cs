@@ -23,7 +23,7 @@ public partial class FitnessTrackerForm : Form
     {
         if (string.IsNullOrWhiteSpace(goalTitleTxt.Text))
         {
-            MessageBox.Show("Please enter a title!");
+            MessageBox.Show("Please enter a title!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -37,8 +37,7 @@ public partial class FitnessTrackerForm : Form
         }
         catch (DuplicateException ex)
         {
-
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 

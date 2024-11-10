@@ -40,23 +40,23 @@ public partial class LoginForm : Form
         }
         catch (NotFoundException ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
         catch (AccountLockedException ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             InitiateAccountRecovery(username);
             return;
         }
         catch (InvalidPasswordExeption ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"An error occured: {ex.Message}");
+            MessageBox.Show($"An error occured: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
@@ -107,19 +107,19 @@ public partial class LoginForm : Form
     {
         if (!_inputFormatValidator.ValidateUsername(usernameTxt.Text))
         {
-            MessageBox.Show("Invalid username format: Usernames must contain only letters and numbers");
+            MessageBox.Show("Invalid username format: Usernames must contain only letters and numbers", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
         if (!_inputFormatValidator.ValidatePasswordLength(passwordTxt.Text))
         {
-            MessageBox.Show("Invalid password length: Passwords must not exceed 12 characters");
+            MessageBox.Show("Invalid password length: Passwords must not exceed 12 characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
         if (!_inputFormatValidator.ValidatePasswordFormat(passwordTxt.Text))
         {
-            MessageBox.Show("Invalid password format: Passwords must contain at least 1 uppercase and 1 lower case character");
+            MessageBox.Show("Invalid password format: Passwords must contain at least 1 uppercase and 1 lower case character", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
